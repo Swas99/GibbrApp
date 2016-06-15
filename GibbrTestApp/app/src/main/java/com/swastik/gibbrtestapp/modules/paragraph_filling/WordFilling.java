@@ -118,7 +118,10 @@ public class WordFilling
     private void createPlaceHolderButtons()
     {
         int cols = 3;
-        int rows = wordsRemaining/cols + 1;
+        int rows= wordsRemaining/cols;
+        if(wordsRemaining%cols!=0)
+            rows++;
+
         int id = 1;
 
         ViewGroup region_placeholders = (ViewGroup)objMainActivity.findViewById(R.id.region_place_holder_buttons);
@@ -167,8 +170,9 @@ public class WordFilling
         View rootView = objMainActivity.dialog.findViewById(R.id.rootView);
         rootView.setScaleX(0);
         rootView.setScaleY(0);
-        rootView.animate().setInterpolator(new OvershootInterpolator(1.2f));
+        rootView.animate().setInterpolator(new OvershootInterpolator(1.8f));
         rootView.animate().scaleX(1).scaleY(1);
+        etWord.performClick();
     }
 
     private void processWord(String word) {

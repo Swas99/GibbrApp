@@ -10,7 +10,6 @@ import com.swastik.gibbrtestapp.modules.helper.MissingWord;
 import com.swastik.gibbrtestapp.utils.CommonUtil;
 
 import java.lang.ref.WeakReference;
-import java.util.HashMap;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -65,11 +64,11 @@ public class InputText
         char startChar = '<';
         char endChar = '>';
         int startIndex = inputStory.indexOf(startChar);
-        int endIndex = inputStory.indexOf(endChar);
+        int endIndex = inputStory.indexOf(endChar,startIndex);
         int id=1;
         String wordType;
 
-        while (startIndex>0 && endIndex>0)
+        while (startIndex>0 && endIndex>0 )
         {
             wordType = inputStory.substring(startIndex+1,endIndex);
             MissingWord objMissingWord = new MissingWord();

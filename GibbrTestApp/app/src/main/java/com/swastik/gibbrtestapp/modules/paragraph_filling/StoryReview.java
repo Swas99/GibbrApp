@@ -1,6 +1,7 @@
 package com.swastik.gibbrtestapp.modules.paragraph_filling;
 
 import android.graphics.Color;
+import android.os.CountDownTimer;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.widget.AppCompatEditText;
 import android.text.Html;
@@ -50,6 +51,7 @@ public class StoryReview
     }
 
     private String getFormattedStory() {
+
         MissingWord objMissingWord;
         String myStory = "";
         int currentIndex = 0;
@@ -72,7 +74,8 @@ public class StoryReview
                 {
                     case R.id.btnDone:
                         {
-
+                            v.setEnabled(false);
+                            animateViewsAndLoadStory();
                         }
                         break;
                     case R.id.btnOk:
@@ -100,7 +103,10 @@ public class StoryReview
     {
         int wordCount = missingWords.size();
         int cols = 3;
-        int rows = wordCount/cols + 1;
+        int rows= wordCount/cols;
+        if(wordCount%cols!=0)
+            rows++;
+
         int id = 1;
 
         ViewGroup region_placeholders = (ViewGroup)objMainActivity.findViewById(R.id.region_place_holder_buttons);
@@ -175,5 +181,34 @@ public class StoryReview
             tvStory.setText(Html.fromHtml(story_formatted));
             objMainActivity.dialog.dismiss();
         }
+    }
+
+    private void animateViewsAndLoadStory() {
+        View btnReplay = objMainActivity.findViewById(R.id.btnReplay);
+        btnReplay.setVisibility(View.VISIBLE);
+        btnReplay.bringToFront();
+        btnReplay.setScaleX(0);
+        btnReplay.animate().scaleX(1);
+        View img_replay = objMainActivity.findViewById(R.id.img_replay);
+        img_replay.setVisibility(View.VISIBLE);
+        img_replay.bringToFront();
+        img_replay.animate().rotationBy(-360);
+        long duration = btnReplay.animate().getDuration();
+        new CountDownTimer(duration + 99, duration + 99) {
+            @Override
+            public void onTick(long millisUntilFinished) {
+
+            }
+
+            @Override
+            public void onFinish() {
+                objMainActivity.loadFinalStoryScreen(getFormattedStory());
+
+//                View btnReplay = objMainActivity.findViewById(R.id.btnReplay);
+//                btnReplay.setVisibility(View.GONE);
+//                View img_replay = objMainActivity.findViewById(R.id.img_replay);
+//                img_replay.setVisibility(View.GONE);
+            }
+        }.start();
     }
 }

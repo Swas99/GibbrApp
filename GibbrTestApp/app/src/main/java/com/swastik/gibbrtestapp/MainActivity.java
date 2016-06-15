@@ -15,6 +15,7 @@ import com.swastik.gibbrtestapp.modules.helper.MissingWord;
 import com.swastik.gibbrtestapp.modules.paragraph_filling.InputText;
 import com.swastik.gibbrtestapp.modules.paragraph_filling.StoryReview;
 import com.swastik.gibbrtestapp.modules.paragraph_filling.WordFilling;
+import com.swastik.gibbrtestapp.modules.your_story.YourStory;
 import com.swastik.gibbrtestapp.utils.CommonUtil;
 
 import java.lang.ref.WeakReference;
@@ -48,14 +49,18 @@ public class MainActivity extends AppCompatActivity {
         StoryReview objStoryReview = new StoryReview(new WeakReference<>(this));
         objStoryReview.init(inputStory, missingWordStringHashMap);
     }
+    public void loadFinalStoryScreen(String formattedStory) {
+        YourStory objYourStory = new YourStory(new WeakReference<>(this));
+        objYourStory.init(formattedStory);
+    }
 
     public void loadScreen(int id)
     {
-        View current_screen = findViewById(R.id.rootView);
+//        View current_screen = findViewById(R.id.rootView);
         LayoutInflater inflater = getLayoutInflater();
         View next_screen = inflater.inflate(id,null);
 
-        current_screen.animate().alpha(0);
+//        current_screen.animate().alpha(0);
         setContentView(next_screen);
         next_screen.setAlpha(0);
         next_screen.animate().alpha(1);

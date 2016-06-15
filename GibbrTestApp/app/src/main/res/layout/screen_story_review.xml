@@ -31,10 +31,15 @@
         </LinearLayout>
     </ScrollView>
 
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1px"
+        android:background="#4B7CDB"
+        />
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Click to change your words"
+        android:text="@string/change_your_words"
         android:textSize="22sp"
         android:gravity="center"/>
     <ScrollView
@@ -52,13 +57,35 @@
         </LinearLayout>
     </ScrollView>
 
-    <Button
-        android:id="@+id/btnDone"
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="63dp"
-        android:text="Done"
-        android:textSize="24sp"
-        android:textColor="#ffffff"
-        android:background="@drawable/background_blue_button"/>
+        android:layout_height="wrap_content">
 
+        <Button
+            android:id="@+id/btnDone"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:text="Done"
+            android:textSize="24sp"
+            android:textColor="#ffffff"
+            android:background="@drawable/background_blue_button"/>
+
+        <View
+            android:visibility="gone"
+            android:id="@+id/btnReplay"
+            android:layout_width="match_parent"
+            android:layout_height="63dp"
+            android:textSize="24sp"
+            android:textColor="#ffffff"
+            android:layout_centerInParent="true"
+            android:background="@drawable/background_red_button"/>
+        <View
+            android:visibility="gone"
+            android:id="@+id/img_replay"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/ic_replay"
+            />
+    </RelativeLayout>
 </LinearLayout>

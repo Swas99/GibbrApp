@@ -81,7 +81,7 @@ public class GetStarted
             @Override
             public void onFinish() {
                 float buffer = 99;
-                float targetY = tvAbout.getY() - 18;
+                float targetY = objMainActivity.findViewById(R.id.img_logo).getHeight()+72f;
                 tvAbout.setVisibility(View.VISIBLE);
                 tvAbout.setY(CommonUtil.getScreenHeight(objMainActivity) + buffer);
                 tvAbout.animate().setDuration(1080).setInterpolator(new LinearInterpolator());
