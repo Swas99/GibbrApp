@@ -3,12 +3,15 @@ package com.swastik.gibbrtestapp;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.os.Bundle;
+import android.os.CountDownTimer;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.swastik.gibbrtestapp.modules.get_started.GetStarted;
 import com.swastik.gibbrtestapp.modules.helper.MissingWord;
@@ -90,12 +93,6 @@ public class MainActivity extends AppCompatActivity {
         {
             dialog = new AlertDialog.Builder(MainActivity.this).show();
             dialog.setCancelable(false);
-//            WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
-//            Window window = dialog.getWindow();
-//            lp.copyFrom(window.getAttributes());
-//            lp.width = JojoUtils.getScreenWidth(getWindowManager().getDefaultDisplay())
-//                    - JojoUtils.ConvertToPx(getApplicationContext(), 40); //WindowManager.LayoutParams.WRAP_CONTENT;
-//            window.setAttributes(lp);
         }
         LayoutInflater inflater = getLayoutInflater();
         View view = inflater.inflate(id, null, true);
@@ -105,5 +102,46 @@ public class MainActivity extends AppCompatActivity {
                 .clearFlags(WindowManager.LayoutParams.FLAG_NOT_FOCUSABLE | WindowManager.LayoutParams.FLAG_ALT_FOCUSABLE_IM);
         dialog.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_VISIBLE);
         return dialog;
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+
+        if ((keyCode == KeyEvent.KEYCODE_BACK))
+        {
+            if(!backPressFlag)
+                setBackPressFlag();
+            else
+            {
+                finish();
+            }
+        }
+        else
+            super.onKeyDown(keyCode, event);
+
+        return false;
+    }
+
+    boolean backPressFlag;
+    public void setBackPressFlag()
+    {
+        try {
+            backPressFlag = true;
+            Toast.makeText(getApplicationContext(), "Tap again to exit", Toast.LENGTH_SHORT).show();
+            new CountDownTimer(2700, 2700) {
+                @Override
+                public void onTick(long millisUntilFinished) {
+                }
+
+                @Override
+                public void onFinish() {
+                    backPressFlag = false;
+                }
+            }.start();
+        }
+        catch (Exception ex){
+            //Toast.makeText(mContext,ex.getMessage(),Toast.LENGTH_SHORT).show();
+        }
     }
 }
